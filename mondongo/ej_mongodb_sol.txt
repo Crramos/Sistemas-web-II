@@ -56,3 +56,6 @@ db.companies.find({founded_year:{$ne:null}},{name:1,founded_year:1,_id:0}).sort(
 
 3. En sample_training.trips, ¿en qué año nació el ciclista más joven? (sol. 1999)
 db.trips.find({"birth year":{$ne:""}},{"birth year":1,_id:0}).sort({"birth year":-1}).limit(1)
+
+Para el caso que pregunte un array y quiera la consola y el número de veces que aparece consolas, coomo en la ordinaria
+db.empresas.aggregate([{$unwind:"$consolas_compatibles"},{$group:{_id:"$consolas_compatibles", total:{$sum:1}}},{ $sort: { total: -1 } } ])
